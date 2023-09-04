@@ -66,12 +66,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerOk(@Valid User user
-//                             ,@RequestParam("emailCodeInput") String emailCodeInput
-//                             ,@RequestParam("emailCode") String emailCode
-//                             ,@RequestParam("pnCodeInput") String pnCodeInput
-//                             ,@RequestParam("pnCode") String pnCode
-//                             ,@RequestParam("email") String email
-//                             ,@RequestParam("phoneNum") String phoneNum
                              , BindingResult result      // 유효성 검사결과 담김
                              , Model model
                              , RedirectAttributes redirectAttributes
@@ -100,10 +94,6 @@ public class UserController {
             redirectAttributes.addFlashAttribute("birth",user.getBirthday());
             redirectAttributes.addFlashAttribute("phoneNum",user.getPhoneNum());
             redirectAttributes.addFlashAttribute("email",user.getEmail());
-//            redirectAttributes.addFlashAttribute("emailCodeInput",emailCodeInput);
-//            redirectAttributes.addFlashAttribute("emailCode",emailCode);
-//            redirectAttributes.addFlashAttribute("pnCodeInput",pnCodeInput);
-//            redirectAttributes.addFlashAttribute("pnCode",pnCode);
 
             List<FieldError> errorList = result.getFieldErrors();
             for (FieldError err : errorList){
@@ -120,22 +110,10 @@ public class UserController {
         return page;
     }
 
-//    @PostMapping("/register/usernameCheck")
-//    public @ResponseBody int usernameCheck(@RequestParam("username")String username){
-//        System.out.println(username);
-//        return userService.usernameCheck(username);
-//    }
-//
-//    @PostMapping("/register/mailCheck")
-//    public @ResponseBody int mailCheck(@RequestParam("email") String email){
-//        return userService.mailCheck(email);
-//    }
-//
     @PreAuthorize("isAnonymous()")
     @GetMapping("findUsernameId")
     public void findUsernameId(){}
-//
-//
+
 //    // 아이디 찾기
     @PostMapping("/findUsernameId")
     public String findUsernameIdOk(@RequestParam("email")String email,
@@ -147,7 +125,6 @@ public class UserController {
        User user = userService.findUsernameId(name,email,birthday);
        String username = user.getUsername();
        model.addAttribute("username",username);
-//       model.addAttribute("username",userService.findUsernameId(email, name, birthday).getUsername());
         return "/user/findUsernameIdOk";
     }
 //
